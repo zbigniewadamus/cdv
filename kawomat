@@ -1,0 +1,145 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <windows.h>
+
+
+using namespace std;
+
+int main(){
+	
+	string kawy[9]={
+		"Cappucino",
+		"Latte",
+		"Latte machiato",
+		"Flat white",
+		"Frappe",
+		"Espresso",
+		"Double espresso",
+		"Espresso machiato",
+		"Herbata"
+	};
+	
+	float ceny[9]={
+		2,
+		2.5,
+		2.5,
+		3,
+		2.5,
+		1.5,
+		2.5,
+		3,
+		1.5
+	};
+	
+	cout<<"Witaj w automacie z goracymi napojami.\n\n";
+	//WYBOR
+	cout<<"Oto co mam do zaoferowania: \n";
+	cout<<" 1. Cappucino, cena: 2 PLN\n";
+	cout<<" 2. Latte, cena:  2.5 PLN\n";
+	cout<<" 3. Latte machiato, cena:  2.5 PLN\n";
+	cout<<" 4. Flat white, cena: 3 PLN\n";
+	cout<<" 5. Frappe, cena: 2.5 PLN\n";
+	cout<<" 6. Espresso, cena: 1.5 PLN\n";
+	cout<<" 7. Double espresso, cena: 2.5 PLN\n";
+	cout<<" 8. Espresso machiato, cena: 3 PLN\n";
+	cout<<" 9. Herbata, cena: 1.5 PLN\n";
+	
+	
+	
+	int wybor;
+	do{
+		cout<<"Podaj numerek napoju: ";
+		cin>>wybor;
+	}while(wybor<1 || wybor>9);
+	
+	int niedostepny = (rand() % 9) + 1;
+	
+	system("cls");
+	
+	if(wybor==niedostepny){
+		cout<<"Brak wybranego napoju, przepraszamy, wciskaj enter\n\n";
+		getchar();
+		getchar();
+		main();
+	}
+	
+	
+	cout<<"Wybrales napoj: "<<kawy[(wybor-1)]<<", cena to: "<<ceny[wybor-1]<<" PLN"<<endl;
+	cout<<"Wrzuc monetki.\n";
+	float monetki[6];
+	float suma=0;
+	int i=0;
+	do{
+		do{
+			cout<<"Wybierz monete ktora wrzucasz (0.5, 1, 2, 5): ";
+			cin>>monetki[i];	
+		}while(!(monetki[i]==0.5 || monetki[i]==1 || monetki[i]==2 || monetki[i]==5));
+
+		suma+=monetki[i];
+		
+		
+		if(suma<ceny[wybor-1]){
+			cout<<"\n"<<"Wrzuciles "<<monetki[i]<<" PLN, razem: "<<suma<<" PLN, brakuje: "<<ceny[wybor-1]-suma<<" PLN\n";
+			cout<<"To wciaz za malo monetek.\n";
+			i++;
+		}
+		else
+			break;
+			
+		
+	}while(suma<ceny[wybor-1]);
+	
+	system("cls");
+	if(suma>ceny[wybor-1]){
+		cout<<"\nObliczam reszte.";
+		Sleep(500);
+		cout<<".";
+		Sleep(500);
+		cout<<".";
+		Sleep(500);
+		cout<<"."; 	
+		Sleep(500);
+		cout<<"."; 	
+		Sleep(500);
+		cout<<"."; 	
+		cout<<"\nTwoja reszta wynosi: "<<suma-ceny[wybor-1]<<" PLN";
+		cout<<"\nWydaje.\n";
+		
+		int poziom;
+		do{	
+			cout<<"Podaj ilosc cukru (1-4): ";
+			cin>>poziom;
+		}while(poziom<0 || poziom>4);
+		
+		
+		cout<<"Za chwile rozpocznie sie przygotowanie napoju.";
+		Sleep(500);
+		cout<<".";
+		Sleep(500);
+		cout<<"."; 	
+		Sleep(500);
+		cout<<"."; 	
+		Sleep(500);
+		cout<<"."; 	
+		system("cls");
+	}
+	
+	cout<<"Trwa przygotowywanie napoju "<<kawy[wybor-1]<<".";
+	Sleep(500);
+		cout<<".";
+		Sleep(500);
+		cout<<"."; 	
+		Sleep(500);
+		cout<<"."; 	
+		Sleep(500);
+		cout<<"."; 	
+	
+	cout<<"\n\nOdbierz swoj napoj.\n\n\nDo widzenia, zapraszamy ponownie.";
+	
+	
+	getchar();
+	return 0;
+	
+}
